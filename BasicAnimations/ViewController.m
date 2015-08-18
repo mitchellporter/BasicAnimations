@@ -36,11 +36,25 @@
 //    }];
     
     
-    CABasicAnimation *theAnim = [CABasicAnimation animationWithKeyPath:@"position"];
-    theAnim.fromValue = [NSValue valueWithCGPoint:myView.layer.position];
-    theAnim.toValue = [NSValue valueWithCGPoint:CGPointMake(myView.layer.position.x, myView.layer.position.y - 50)];
-    theAnim.duration = 3.0;
-    [myView.layer addAnimation:theAnim forKey:@"AnimateFrame"];
+    // create a CGPath that implements two arcs (a bounce)
+    CGMutablePathRef thePath = CGPathCreateMutable();
+    CGPathMoveToPoint(thePath,NULL,74.0,74.0);
+    CGPathAddCurveToPoint(thePath,NULL,74.0,500.0,
+                          320.0,500.0,
+                          320.0,74.0);
+    CGPathAddCurveToPoint(thePath,NULL,320.0,500.0,
+                          566.0,500.0,
+                          566.0,74.0);
+    
+    CAKeyframeAnimation * theAnimation;
+    
+    // Create the animation object, specifying the position property as the key path.
+    theAnimation=[CAKeyframeAnimation animationWithKeyPath:@"position"];
+    theAnimation.path=thePath;
+    theAnimation.duration=5.0;
+    
+    // Add the animation to the layer.
+    [myView.layer addAnimation:theAnimation forKey:@"position"];
 
     
 }

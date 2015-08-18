@@ -23,32 +23,15 @@
     myView1.backgroundColor = [UIColor redColor];
     [self.view addSubview:myView1];
     
-    UIView *myView2 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
-    myView2.center = self.view.center;
-    myView2.backgroundColor = [UIColor blueColor];
-    [self.view addSubview:myView2];
-    myView2.hidden = YES;
     
-    CABasicAnimation *anim = [CABasicAnimation animation];
-    anim.keyPath = @"opacity";
-    anim.repeatCount = 5;
-    anim.autoreverses = YES;
-    anim.fromValue = @(0.1);
-    anim.toValue = @(1);
-    anim.duration = 1;
-    [myView1.layer addAnimation:anim forKey:@"myAnim"];
+    
+    [UIView animateWithDuration:1.0 animations:^{
 
-
-    [UIView animateWithDuration:3.0 animations:^{
-
-        myView1.transform = CGAffineTransformConcat(CGAffineTransformMakeRotation(3.5), CGAffineTransformMakeScale(2.0, 2.0));
-
+        myView1.transform = CGAffineTransformMakeTranslation(myView1.bounds.origin.x, myView1.bounds.origin.y - 100);
+        
     } completion:^(BOOL finished) {
 
-        myView1.transform = CGAffineTransformConcat(CGAffineTransformMakeRotation(-3.5), CGAffineTransformMakeScale(1.0, 1.0));
-        
     }];
- 
 }
 
 - (void)didReceiveMemoryWarning {

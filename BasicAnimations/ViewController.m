@@ -39,10 +39,16 @@
     [myView1.layer addAnimation:anim forKey:@"myAnim"];
 
 
-//    [UIView animateWithDuration:1.0 animations:^{
-//        //
-//        myView1.transform = CGAffineTransformMakeRotation(3.5);
-//    }];
+    [UIView animateWithDuration:3.0 animations:^{
+
+        myView1.transform = CGAffineTransformConcat(CGAffineTransformMakeRotation(3.5), CGAffineTransformMakeScale(2.0, 2.0));
+
+    } completion:^(BOOL finished) {
+
+        myView1.transform = CGAffineTransformConcat(CGAffineTransformMakeRotation(-3.5), CGAffineTransformMakeScale(1.0, 1.0));
+        
+    }];
+ 
 }
 
 - (void)didReceiveMemoryWarning {

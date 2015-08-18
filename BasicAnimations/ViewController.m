@@ -50,13 +50,11 @@
     [UIView animateWithDuration:1.0 animations:^{
         //
         //create a new transform
-        CGAffineTransform transform = CGAffineTransformIdentity; //scale by 50%
-        transform = CGAffineTransformScale(transform, 0.5, 0.5); //rotate by 30 degrees
-        transform = CGAffineTransformRotate(transform, M_PI / 180.0 * 30.0); //translate by 200 points
-        transform = CGAffineTransformTranslate(transform, 200, 0);
-        //apply transform to layer
-        self.myView1.layer.affineTransform = transform;
-
+        CATransform3D transform = CATransform3DIdentity; //apply perspective
+        transform.m34 = - 1.0 / 500.0; //rotate by 45 degrees along the Y axis
+        transform = CATransform3DRotate(transform, M_PI_4, 0, 1, 0);
+        //apply to layer
+        self.myView1.layer.transform = transform;
     }];
 }
 
